@@ -10,7 +10,7 @@ from ingredient_phrase_tagger.training import utils
 
 
 def _exec_crf_test(input_text, model_path):
-    with tempfile.NamedTemporaryFile() as input_file:
+    with tempfile.NamedTemporaryFile(mode='w+', encoding='utf-8') as input_file:
         input_file.write(utils.export_data(input_text))
         input_file.flush()
         return subprocess.check_output(
