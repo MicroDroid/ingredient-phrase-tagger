@@ -1,8 +1,8 @@
 FROM mtlynch/crfpp
-LABEL maintainer="Michael Lynch <michael@mtlynch.io>"
+LABEL maintainer="Yousef Sultan <mail@overcoder.dev>"
 
 ARG BUILD_DATE
-ENV VCS_URL https://github.com/mtlynch/ingredient-phrase-tagger.git
+ENV VCS_URL https://github.com/MicroDroid/ingredient-phrase-tagger.git
 ARG VCS_REF
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
