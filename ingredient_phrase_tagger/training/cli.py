@@ -19,7 +19,7 @@ class Cli(object):
             data_reader = labelled_data.Reader(data_file)
             for row in data_reader:
                 sys.stdout.buffer.write(
-                    translator.translate_row(row).encode('utf8'))
+                    (translator.translate_row(row) + '\n').encode('utf8'))
 
     def _parse_args(self, argv):
         """
