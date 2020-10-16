@@ -39,11 +39,11 @@ CRF_TESTING_FILE="${OUTPUT_DIR}/testing_data.crf"
 
 CRF_LEARN_TEMPLATE=template_file
 
-MODEL_TIMESTAMP=$(date +%Y%m%d_%H%M)
-DATA_VERSION="${LABELLED_DATA_FILE/\.csv/}"
-CODE_VERSION=$(git rev-parse --short HEAD)
+# MODEL_TIMESTAMP=$(date +%Y%m%d_%H%M)
+# DATA_VERSION="${LABELLED_DATA_FILE/\.csv/}"
+# CODE_VERSION=$(git rev-parse --short HEAD)
 
-CRF_MODEL_FILE="${OUTPUT_DIR}/${MODEL_TIMESTAMP}-${DATA_VERSION}-${CODE_VERSION}.crfmodel"
+CRF_MODEL_FILE="${OUTPUT_DIR}/ingredients.crfmodel"
 TESTING_OUTPUT_FILE="${OUTPUT_DIR}/testing_output"
 EVAL_OUTPUT_FILE="${OUTPUT_DIR}/eval_output"
 
