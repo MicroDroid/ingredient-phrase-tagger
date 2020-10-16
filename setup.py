@@ -3,11 +3,7 @@ import sys
 
 from setuptools import setup, find_packages
 
-import ingredient_phrase_tagger
-
-requires, extra = ['Unidecode==1.1.1'], {}
-if sys.version_info >= (3,):
-    extra['use_2to3'] = True
+requires = ['Unidecode==1.1.1']
 
 setup(
     name='ingredient_phrase_tagger',
@@ -20,4 +16,4 @@ setup(
     install_requires=requires,
     packages=find_packages(),
     package_dir={'ingredient_phrase_tagger': 'ingredient_phrase_tagger'},
-    **extra)
+)
