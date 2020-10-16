@@ -1,11 +1,11 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 import sys
 
 from setuptools import setup, find_packages
 
 import ingredient_phrase_tagger
 
-requires, extra = ['unicodecsv==0.14.1', 'Unidecode==1.0.22'], {}
+requires, extra = ['Unidecode==1.1.1'], {}
 if sys.version_info >= (3,):
     extra['use_2to3'] = True
 

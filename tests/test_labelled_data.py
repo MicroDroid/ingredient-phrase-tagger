@@ -15,47 +15,47 @@ index,input,name,qty,range_end,unit,comment
 """.strip())
         reader = labelled_data.Reader(mock_file)
         self.assertEqual([{
-            'input': u'4 to 6 large cloves garlic',
+            'input': '4 to 6 large cloves garlic',
             'qty': 4.0,
-            'unit': u'clove',
-            'name': u'garlic',
+            'unit': 'clove',
+            'name': 'garlic',
             'range_end': 6.0,
-            'comment': u'',
+            'comment': '',
         }, {
-            'input': u'3 bananas',
+            'input': '3 bananas',
             'qty': 3.0,
-            'unit': u'',
-            'name': u'bananas',
-            'comment': u'',
+            'unit': '',
+            'name': 'bananas',
+            'comment': '',
             'range_end': 0.0,
         }, {
-            'input': (u'2 1/2 pounds bell peppers (about 6 peppers in '
-                      u'assorted colors), cut into 2-inch chunks'),
+            'input': ('2 1/2 pounds bell peppers (about 6 peppers in '
+                      'assorted colors), cut into 2-inch chunks'),
             'qty':
             2.5,
             'unit':
-            u'pound',
+            'pound',
             'name':
-            u'bell peppers',
+            'bell peppers',
             'range_end':
             0.0,
-            'comment': (u'(about 6 peppers in assorted colors), cut into '
-                        u'2-inch chunks'),
+            'comment': ('(about 6 peppers in assorted colors), cut into '
+                        '2-inch chunks'),
         }], [r for r in reader])
 
     def test_reads_file_with_utf8_encoding(self):
         mock_file = io.BytesIO(
-            (u'index,input,name,qty,range_end,unit,comment\n'
-             u'1,2 jalape\xc3\xb1os,jalape\xc3\xb1os,2.0,0.0,,,\n'
+            ('index,input,name,qty,range_end,unit,comment\n'
+             '1,2 jalape\xc3\xb1os,jalape\xc3\xb1os,2.0,0.0,,,\n'
             ).encode('utf-8'))
         reader = labelled_data.Reader(mock_file)
         self.assertEqual([{
-            'input': u'2 jalape\xc3\xb1os',
-            'name': u'jalape\xc3\xb1os',
+            'input': '2 jalape\xc3\xb1os',
+            'name': 'jalape\xc3\xb1os',
             'qty': 2.0,
-            'unit': u'',
+            'unit': '',
             'range_end': 0.0,
-            'comment': u'',
+            'comment': '',
         }], [r for r in reader])
 
     def test_interprets_empty_range_end_as_zero(self):
@@ -65,13 +65,13 @@ index,input,name,qty,range_end,unit,comment
 """.strip())
         reader = labelled_data.Reader(mock_file)
         self.assertEqual({
-            'input': u'3 bananas',
+            'input': '3 bananas',
             'qty': 3.0,
-            'unit': u'',
-            'name': u'bananas',
-            'comment': u'',
+            'unit': '',
+            'name': 'bananas',
+            'comment': '',
             'range_end': 0.0,
-        }, reader.next())
+        }, next(reader))
 
     def test_raises_error_when_csv_does_not_have_required_columns(self):
         with self.assertRaises(labelled_data.InvalidHeaderError):
@@ -79,7 +79,7 @@ index,input,name,qty,range_end,unit,comment
 index,input,UNEXPECTED_COLUMN,qty,range_end,unit,comment
 77,3 bananas,bananas,3.0,0.0,,
 """.strip())
-            labelled_data.Reader(mock_file).next()
+            next(labelled_data.Reader(mock_file))
 
 
 class WriterTest(unittest.TestCase):
@@ -91,32 +91,32 @@ class WriterTest(unittest.TestCase):
         mock_file = io.BytesIO()
         writer = labelled_data.Writer(mock_file)
         writer.writerows([{
-            'input': u'4 to 6 large cloves garlic',
+            'input': '4 to 6 large cloves garlic',
             'qty': 4.0,
-            'unit': u'clove',
-            'name': u'garlic',
+            'unit': 'clove',
+            'name': 'garlic',
             'range_end': 6.0,
-            'comment': u'',
+            'comment': '',
         }, {
-            'input': u'3 bananas',
+            'input': '3 bananas',
             'qty': 3.0,
-            'unit': u'',
-            'name': u'bananas',
-            'comment': u'',
+            'unit': '',
+            'name': 'bananas',
+            'comment': '',
             'range_end': 0.0,
         }, {
-            'input': (u'2 1/2 pounds bell peppers (about 6 peppers in '
-                      u'assorted colors), cut into 2-inch chunks'),
+            'input': ('2 1/2 pounds bell peppers (about 6 peppers in '
+                      'assorted colors), cut into 2-inch chunks'),
             'qty':
             2.5,
             'unit':
-            u'pound',
+            'pound',
             'name':
-            u'bell peppers',
+            'bell peppers',
             'range_end':
             0.0,
-            'comment': (u'(about 6 peppers in assorted colors), cut into '
-                        u'2-inch chunks'),
+            'comment': ('(about 6 peppers in assorted colors), cut into '
+                        '2-inch chunks'),
         }])
         self.assertMultiLineEqual("""
 input,name,qty,range_end,unit,comment
@@ -130,34 +130,34 @@ input,name,qty,range_end,unit,comment
         mock_file = io.BytesIO()
         writer = labelled_data.Writer(mock_file)
         writer.writerow({
-            'input': u'4 to 6 large cloves garlic',
+            'input': '4 to 6 large cloves garlic',
             'qty': 4.0,
-            'unit': u'clove',
-            'name': u'garlic',
+            'unit': 'clove',
+            'name': 'garlic',
             'range_end': 6.0,
-            'comment': u'',
+            'comment': '',
         })
         writer.writerow({
-            'input': u'3 bananas',
+            'input': '3 bananas',
             'qty': 3.0,
-            'unit': u'',
-            'name': u'bananas',
-            'comment': u'',
+            'unit': '',
+            'name': 'bananas',
+            'comment': '',
             'range_end': 0.0,
         })
         writer.writerow({
-            'input': (u'2 1/2 pounds bell peppers (about 6 peppers in '
-                      u'assorted colors), cut into 2-inch chunks'),
+            'input': ('2 1/2 pounds bell peppers (about 6 peppers in '
+                      'assorted colors), cut into 2-inch chunks'),
             'qty':
             2.5,
             'unit':
-            u'pound',
+            'pound',
             'name':
-            u'bell peppers',
+            'bell peppers',
             'range_end':
             0.0,
-            'comment': (u'(about 6 peppers in assorted colors), cut into '
-                        u'2-inch chunks'),
+            'comment': ('(about 6 peppers in assorted colors), cut into '
+                        '2-inch chunks'),
         })
         self.assertMultiLineEqual("""
 input,name,qty,range_end,unit,comment
@@ -171,14 +171,14 @@ input,name,qty,range_end,unit,comment
         mock_file = io.BytesIO()
         writer = labelled_data.Writer(mock_file)
         writer.writerow({
-            'input': u'2 jalape\xc3\xb1os',
-            'name': u'jalape\xc3\xb1os',
+            'input': '2 jalape\xc3\xb1os',
+            'name': 'jalape\xc3\xb1os',
             'qty': 2.0,
-            'unit': u'',
+            'unit': '',
             'range_end': 0.0,
-            'comment': u'',
+            'comment': '',
         })
         self.assertMultiLineEqual(
-            (u'input,name,qty,range_end,unit,comment\n'
-             u'2 jalape\xc3\xb1os,jalape\xc3\xb1os,2.0,0.0,,\n'),
+            ('input,name,qty,range_end,unit,comment\n'
+             '2 jalape\xc3\xb1os,jalape\xc3\xb1os,2.0,0.0,,\n'),
             mock_file.getvalue().decode('utf-8'))

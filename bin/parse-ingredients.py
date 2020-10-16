@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 import argparse
 import json
@@ -25,7 +25,7 @@ def _convert_crf_output_to_json(crf_output):
 def main(args):
     raw_ingredient_lines = [x for x in sys.stdin.readlines() if x]
     crf_output = _exec_crf_test(raw_ingredient_lines, args.model_file)
-    print _convert_crf_output_to_json(crf_output.split('\n'))
+    print(_convert_crf_output_to_json(crf_output.split('\n')))
 
 
 if __name__ == '__main__':

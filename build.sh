@@ -4,6 +4,7 @@
 set -e
 
 # Echo commands to stdout.
+PS4='\033[1;34m$(date +%H:%M:%S)\033[0m ';
 set -x
 
 # Delete pyc files from previous builds.

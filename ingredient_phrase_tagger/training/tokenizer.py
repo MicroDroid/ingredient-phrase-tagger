@@ -1,6 +1,6 @@
 import re
 
-import utils
+from . import utils
 
 
 def tokenize(s):
@@ -27,4 +27,4 @@ def tokenize(s):
         s = s.replace(unit + '/', unit + ' ')
         s = s.replace(unit + 's/', unit + 's ')
 
-    return filter(None, re.split(r'([,\(\)])?\s*', utils.clumpFractions(s)))
+    return [_f for _f in re.split(r'([,\(\)])?\s*', utils.clumpFractions(s)) if _f]

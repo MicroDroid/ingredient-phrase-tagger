@@ -1,7 +1,7 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 import re
 
-import tokenizer
+from . import tokenizer
 
 
 def joinLine(columns):
@@ -29,25 +29,25 @@ def cleanUnicodeFractions(s):
     """
 
     fractions = {
-        u'\x215b': '1/8',
-        u'\x215c': '3/8',
-        u'\x215d': '5/8',
-        u'\x215e': '7/8',
-        u'\x2159': '1/6',
-        u'\x215a': '5/6',
-        u'\x2155': '1/5',
-        u'\x2156': '2/5',
-        u'\x2157': '3/5',
-        u'\x2158': '4/5',
-        u'\xbc': ' 1/4',
-        u'\xbe': '3/4',
-        u'\x2153': '1/3',
-        u'\x2154': '2/3',
-        u'\xbd': '1/2',
+        '\x215b': '1/8',
+        '\x215c': '3/8',
+        '\x215d': '5/8',
+        '\x215e': '7/8',
+        '\x2159': '1/6',
+        '\x215a': '5/6',
+        '\x2155': '1/5',
+        '\x2156': '2/5',
+        '\x2157': '3/5',
+        '\x2158': '4/5',
+        '\xbc': ' 1/4',
+        '\xbe': '3/4',
+        '\x2153': '1/3',
+        '\x2154': '2/3',
+        '\xbd': '1/2',
     }
 
-    for f_unicode, f_ascii in fractions.items():
-        s = s.replace(f_unicode, u' ' + f_ascii)
+    for f_unicode, f_ascii in list(fractions.items()):
+        s = s.replace(f_unicode, ' ' + f_ascii)
 
     return s
 
@@ -85,34 +85,34 @@ def singularize(word):
     """
 
     units = {
-        "cups": u"cup",
-        "tablespoons": u"tablespoon",
-        "teaspoons": u"teaspoon",
-        "pounds": u"pound",
-        "ounces": u"ounce",
-        "cloves": u"clove",
-        "sprigs": u"sprig",
-        "pinches": u"pinch",
-        "bunches": u"bunch",
-        "slices": u"slice",
-        "grams": u"gram",
-        "heads": u"head",
-        "quarts": u"quart",
-        "stalks": u"stalk",
-        "pints": u"pint",
-        "pieces": u"piece",
-        "sticks": u"stick",
-        "dashes": u"dash",
-        "fillets": u"fillet",
-        "cans": u"can",
-        "ears": u"ear",
-        "packages": u"package",
-        "strips": u"strip",
-        "bulbs": u"bulb",
-        "bottles": u"bottle"
+        "cups": "cup",
+        "tablespoons": "tablespoon",
+        "teaspoons": "teaspoon",
+        "pounds": "pound",
+        "ounces": "ounce",
+        "cloves": "clove",
+        "sprigs": "sprig",
+        "pinches": "pinch",
+        "bunches": "bunch",
+        "slices": "slice",
+        "grams": "gram",
+        "heads": "head",
+        "quarts": "quart",
+        "stalks": "stalk",
+        "pints": "pint",
+        "pieces": "piece",
+        "sticks": "stick",
+        "dashes": "dash",
+        "fillets": "fillet",
+        "cans": "can",
+        "ears": "ear",
+        "packages": "package",
+        "strips": "strip",
+        "bulbs": "bulb",
+        "bottles": "bottle"
     }
 
-    if word in units.keys():
+    if word in list(units.keys()):
         return units[word]
     else:
         return word
@@ -268,7 +268,7 @@ def import_data(lines):
     # reassemble the output into a list of dicts.
     output = [
         dict([(k, smartJoin(tokens))
-              for k, tokens in ingredient.iteritems()])
+              for k, tokens in ingredient.items()])
         for ingredient in data
         if len(ingredient)
     ]

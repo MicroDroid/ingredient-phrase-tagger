@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 import argparse
 
 from ingredient_phrase_tagger.training import labelled_data
@@ -6,9 +6,9 @@ from ingredient_phrase_tagger.training import partitioner
 
 
 def main(args):
-    with open(args.label_path) as label_file, open(
-            args.training_path, 'wb') as training_file, open(
-                args.testing_path, 'wb') as testing_file:
+    with open(args.label_path, 'r', encoding='utf-8') as label_file, open(
+            args.training_path, 'w', encoding='utf-8') as training_file, open(
+                args.testing_path, 'w', encoding='utf-8') as testing_file:
         label_reader = labelled_data.Reader(label_file)
         training_writer = labelled_data.Writer(training_file)
         testing_writer = labelled_data.Writer(testing_file)
