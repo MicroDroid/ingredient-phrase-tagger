@@ -14,13 +14,27 @@ RUN apt-get update -y && \
 	apt-get install -y git python3 python3-pip
 
 WORKDIR /app
-COPY . .
+COPY ./requirements.txt ./
 
-RUN python3 setup.py install
+RUN pip3 install -r requirements.txt
 
-# Clean up.
 RUN rm -rf /var/lib/apt/lists/* && \
 	rm -Rf /usr/share/doc && \
 	rm -Rf /usr/share/man && \
 	apt-get autoremove -y && \
 	apt-get clean
+
+COPY . .
+
+ENV PYTHONPATH=/app/ \
+	LABELLED_DATA_FILE=nyt-ingredients-snapshot-2015.csv \
+	LABELLED_EXAMPLE_COUNT=0 \
+	TRAINING_DATA_PERCENT=0.1 \
+	CRF_TRAINING_THREADS=8 \
+	OUTPUT_DIR=./models
+
+RUN ./bin/train-model ./models
+
+ENTRYPOINT [ "uwsgi", "--threads", "4", "--http-socket", ":8080", "--wsgi-file", "server.py" ]
+
+EXPOSE 8080
